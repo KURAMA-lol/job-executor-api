@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: job-executor-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: REDIS_URL
+        fromDatabase:
+          name: job-executor-redis
+          property: connectionString
+
+databases:
+  - name: job-executor-redis
+    plan: free
+    ipAllowList: []
