@@ -20,6 +20,19 @@ const jobStatus = new Map();
 
 // ===== ENDPOINTS =====
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    name: 'job-executor-api',
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      run: 'POST /run',
+      status: 'GET /status/:jobId'
+    }
+  });
+});
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
